@@ -1,0 +1,20 @@
+#
+# pre-commit-hooks
+#
+# Copyright ©2021 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# https://github.com/MarcinOrlowski/pre-commit-hooks/
+#
+
+-   id: checkstyle-jar
+    name: Checkstyle Java source linter
+    description: "Runs CheckStyle JAR on modified Java files."
+    entry: mor_checkstyle
+    language: python
+    types: [file, java]
+    additional_dependencies: [requests]
+-   id: noop
+    name: Do-nothing hook
+    description: "[DEV] Dummy NO-OP hook."
+    entry: mor_noop
+    language: python
+

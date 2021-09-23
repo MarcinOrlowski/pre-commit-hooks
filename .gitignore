@@ -1,3 +1,9 @@
+/.pre-commit-config.yaml
+*.java
+/.idea/
+*.jar
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
