@@ -6,12 +6,13 @@
 #
 
 -   id: checkstyle-jar
-    name: Checkstyle Java source linter
+    name: Check that source code follows guidelines
     description: "Runs CheckStyle JAR on modified Java files."
     entry: mor_checkstyle
     language: python
     types: [file, java]
     additional_dependencies: [requests]
+
 -   id: noop
     name: Do-nothing hook
     description: "[DEV] Dummy NO-OP hook."
