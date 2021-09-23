@@ -25,10 +25,10 @@ setup(
     install_requires = [],
     entry_points = {
         'console_scripts': [
-            'mor_checkstyle_jar = hooks.checkstyle:main',
-            'mor_trailing_whitespaces = hooks.trailing_whitespaces:main',
-            'mor_end_of_file = hooks.end_of_file:main',
-            'mor_noop = hooks.noop:main',
+            'mor-checkstyle-jar = hooks.checkstyle:main',
+            'mor-trailing-whitespaces = hooks.trailing_whitespaces:main',
+            'mor-end-of-file = hooks.end_of_file:main',
+            'mor-no-op = hooks.no_op:main',
         ],
     },
 )
