@@ -7,7 +7,9 @@ Git hooks to integrate with [pre-commit](http://pre-commit.com/).
 - [Configure pre-commit](#configure-pre-commit)
 - [Two ways to invoke pre-commit](#two-ways-to-invoke-pre-commit)
 - [Available hooks](#available-hooks)
-  - [`bundler-audit`](#bundler-audit)
+  - [`checkstyle-jar`](#checkstyle-jar)
+  - [`end-of-file`](#end-of-file)
+  - [`trailing-whotespaces`](#trailing-whitespaces)
 - [License](#license)
 
 <!--TOC-->
@@ -43,17 +45,15 @@ If you want to run the checks on-demand (outside of git hooks), run:
 
 ### `checkstyle-jar`
 
-**What it does**
+Uses [CheckStyle](https://checkstyle.org/) linter against Java source codes. Contrary to other implementations this one **
+requires** CheckStyle JAR file to be given, instead of using system wide available application. This hook expects `java` binary to
+be in `$PATH`.
 
-* Uses [CheckStyle](https://checkstyle.org/) linter against Java source codes. Contrary to other implementations this one **
-  requires** CheckStyle JAR file to be given, instead of using system wide available application. This hook expects `java` binary to
-  be in `$PATH`.
-
-**Arguments**
+#### Arguments ####
 
 * `--jar` path to the Checkstyle JAR file. If not specified, looks for `checkstyle-9.0-all.jar` in project directory.
 
-**Example**
+#### Example ####
 
 ```yaml
 - repo: https://github.com/MarcinOrlowski/pre-commit-hooks
@@ -64,9 +64,9 @@ If you want to run the checks on-demand (outside of git hooks), run:
       args: [ '--jar=/path/to/checkstyle.jar' ]
 ```
 
-**More info**
+## `end-of-file` ##
 
-See https://checkstyle.org/ for details.
+Makes sure files end in a newline and only a newline.
 
 ## License ##
 
