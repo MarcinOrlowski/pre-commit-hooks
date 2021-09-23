@@ -20,10 +20,10 @@
     language: python
     types: [file]
 
--   id: end-of-files
+-   id: end-of-file
     name: Check that file ends with one newline
     description: "Ensures that a file is either empty, or ends with one newline."
-    entry: mor_end_of_line
+    entry: mor_end_of_file
     language: python
     types: [file]
 
