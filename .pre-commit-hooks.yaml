@@ -8,7 +8,7 @@
 -   id: checkstyle-jar
     name: Check that source code follows guidelines
     description: "Runs CheckStyle JAR on modified Java files."
-    entry: mor-checkstyle
+    entry: mor-checkstyle-jar
     language: python
     types: [file, java]
     additional_dependencies: [requests]
