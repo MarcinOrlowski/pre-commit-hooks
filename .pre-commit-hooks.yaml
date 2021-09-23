@@ -13,14 +13,14 @@
     types: [file, java]
     additional_dependencies: [requests]
 
--   id: trailing_whitespaces
+-   id: trailing-whitespaces
     name: Check there's no trailing whitespaces
     description: "Looks for trailing whitespace. Can fix it too!"
     entry: mor_trailing_whitespaces
     language: python
     types: [file]
 
--   id: end_of_files
+-   id: end-of-files
     name: Check that file ends with one newline
     description: "Ensures that a file is either empty, or ends with one newline."
     entry: mor_end_of_line
