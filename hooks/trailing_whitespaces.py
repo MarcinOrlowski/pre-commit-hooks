@@ -74,8 +74,10 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         md = all_markdown or extension in md_exts
         if _fix_file(args, filename, md, chars):
             if args.fix:
-                print(f'Fixing {filename}')
-                return_code = 1
+                print(f'Fixed {filename}')
+            else:
+                print(f'[ERROR] {filename}')
+            return_code = 1
     return return_code
 
 
