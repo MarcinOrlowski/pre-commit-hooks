@@ -1,3 +1,8 @@
+![pre-commit-hooks logo](artwork/logo.png)
+
+Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework.
+
+---
 
 # Changelog #
 
