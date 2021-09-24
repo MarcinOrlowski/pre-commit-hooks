@@ -23,7 +23,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 ## Summary ##
 
 * Hook ID: `checkstyle-jar`
-* Depends on: Java, [CheckStyle JAR](https://checkstyle.org/) 
+* Depends on: Java, [CheckStyle JAR](https://checkstyle.org/)
 
 ## Description ##
 
@@ -37,7 +37,10 @@ Note, you must configure this hook before use. JAR file can be downloaded from t
 
 ## Arguments ##
 
+* `--jar-url` full URL to downloadable Checkstyle JAR file. If specified, and there's no cached JAR file found, the JAR file will be
+  automatically downloaded and cached locally.
 * `--jar` path to the Checkstyle JAR file. If not specified, looks for `checkstyle-9.0-all.jar` in project directory.
+* `--cache` path to cache directory where downloaded JAR should be stored (defaults to `~/.cache/pre-commit/`).
 
 ## Examples ##
 

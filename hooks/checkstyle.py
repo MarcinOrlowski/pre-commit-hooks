@@ -13,36 +13,75 @@
 from __future__ import print_function
 
 import argparse
+import pathlib
 import sys
 from pathlib import Path
 from subprocess import run
+from urllib import request, parse
 
 RC_OK = 0
 RC_ERROR = 1
 RC_FAKE_ERROR_CODE = 10
+RC_DOWNLOAD_ERROR = 20
 RC_NO_JAR = 150
 
 
-def main(argv = None):
+def main(self, argv = None):
     parser = argparse.ArgumentParser()
-    parser.add_argument('--jar', action = 'store', dest = 'jar', nargs = 1, metavar = 'FILE',
-                        help = 'Path to Checkstyle JAR file, incl. JAR file name.')
+    command_group = parser.add_mutually_exclusive_group()
+    command_group.add_argument('--cache', action = 'store', dest = 'cache', nargs = 1, metavar = 'DIR',
+                               default = ['~/.cache/pre-commit'],
+                               help = 'Path to shared cache directory to use to store downloaded JAR file.')
+    command_group.add_argument('--jar', action = 'store', dest = 'jar', nargs = 1, metavar = 'FILE',
+                               default = ['checkstyle-9.0-all.jar'],
+                               help = 'Path to Checkstyle JAR file, incl. JAR file name.')
+    command_group.add_argument('--jar-url', action = 'store', dest = 'jar_url', nargs = 1, metavar = 'URL',
+                               default = [
+                                   'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-9.0/checkstyle-9.0-all.jar'],
+                               help = 'URL to downloadable Checkstyle JAR file.')
     parser.add_argument('files', nargs = '*', help = 'Files to check.')
     args = parser.parse_args(argv)
+
+    if args.jar_url:
+        args.jar_url = args.jar_url[0]
+
+    # https://github.com/checkstyle/checkstyle/releases/
+    args.jar = Path(args.jar[0]).expanduser()
+    args.cache = Path(args.cache[0]).expanduser()
+
+    if not args.cache.is_dir():
+        print(f'The --cache must point to writable directory: {args.cache}')
+        return RC_ERROR
 
     if not args.files:
         return RC_OK
 
-    # https://github.com/checkstyle/checkstyle/releases/
-    checkstyle_jar = Path(args.jar[0]) if args.jar else Path('checkstyle-9.0-all.jar')
+    if args.jar_url:
+        parsed_url = parse.urlparse(args.jar_url)
+        downloaded_jar_filename = pathlib.Path(parsed_url.path).name
+        downloaded_jar_path = Path(args.cache).expanduser() / downloaded_jar_filename
+        download_tmp_filename = f'{downloaded_jar_filename}.tmp'
+        downloaded_jar_path = Path(args.cache).expanduser() / download_tmp_filename
+        if not downloaded_jar_path.exists():
+            print(f'Downloading {downloaded_jar_filename} to {args.cache}...')
+            path, http = request.urlretrieve(args.jar_url, download_tmp_filename)
+            tmp_path = Path(path)
+            if not tmp_path.exists():
+                print(f'Failed to download JAR file: {args.jar_url}')
+                return RC_DOWNLOAD_ERROR
+            tmp_path.rename(downloaded_jar_path)
 
-    if not checkstyle_jar.exists():
-        print(f'Checkstyle JAR file not found: {checkstyle_jar}')
-        print('See download page: https://github.com/checkstyle/checkstyle/releases/');
+        if downloaded_jar_path.exists():
+            args.jar = downloaded_jar_path
+
+    if not args.jar.exists():
+        print(f'Checkstyle JAR file not found: {args.jar}')
+        print('See download page: https://github.com/checkstyle/checkstyle/releases/')
+        print('or use --jar-url argument to point to downloadable JAR file.')
         return RC_NO_JAR
 
     # https://checkstyle.sourceforge.io/cmdline.html#Download_and_Run
-    cmd = ['java', '-jar', checkstyle_jar, '-c', '/google_checks.xml'] + args.files
+    cmd = ['java', '-jar', args.jar, '-c', '/google_checks.xml'] + args.files
 
     completed = run(cmd, capture_output = True)
     return_code = completed.returncode
