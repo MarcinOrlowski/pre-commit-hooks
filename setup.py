@@ -1,3 +1,10 @@
+#
+# pre-commit-hooks
+#
+# Copyright ©2021 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# https://github.com/MarcinOrlowski/pre-commit-hooks/
+#
+
 from setuptools import find_packages
 from setuptools import setup
 
@@ -25,7 +32,7 @@ setup(
     install_requires = [],
     entry_points = {
         'console_scripts': [
-            'mor-checkstyle-jar = hooks.checkstyle:main',
+            'mor-checkstyle-jar = hooks.checkstyle_jar:main',
             'mor-trailing-whitespaces = hooks.trailing_whitespaces:main',
             'mor-end-of-file = hooks.end_of_file:main',
             'mor-no-op = hooks.no_op:main',
