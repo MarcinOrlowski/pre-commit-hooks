@@ -11,7 +11,7 @@
     entry: mor-checkstyle-jar
     language: python
     types: [file, java]
-    additional_dependencies: [requests]
+    # additional_dependencies: [requests]
 
 -   id: trailing-whitespaces
     name: Check there's no trailing whitespaces
