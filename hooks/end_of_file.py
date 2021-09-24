@@ -66,7 +66,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     for filename in args.filenames:
         # Read as binary so we can read byte-by-byte
         with open(filename, 'rb+') as file_obj:
-            ret_for_file = fix_file(file_obj)
+            ret_for_file = fix_file(args, file_obj)
             if ret_for_file:
                 print(f'Fixing {filename}')
             retv |= ret_for_file
