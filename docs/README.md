@@ -7,8 +7,6 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 <!--TOC-->
 
 * [« Main README](../README.md)
-* [Configure pre-commit](#configure-pre-commit)
-* [Two ways to invoke pre-commit](#two-ways-to-invoke-pre-commit)
 * **Available hooks**
   * [checkstyle-jar](checkstyle-jar.md)
   * [end-of-file](end-of-file.md)
