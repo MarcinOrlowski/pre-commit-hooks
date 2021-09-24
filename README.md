@@ -1,6 +1,6 @@
-# Pre-commit git hooks
+# pre-commit Git hooks
 
-Git hooks to integrate with [pre-commit](http://pre-commit.com/).
+Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework.
 
 <!--TOC-->
 
@@ -9,7 +9,7 @@ Git hooks to integrate with [pre-commit](http://pre-commit.com/).
 - [Available hooks](#available-hooks)
   - [`checkstyle-jar`](#checkstyle-jar)
   - [`end-of-file`](#end-of-file)
-  - [`trailing-whotespaces`](#trailing-whitespaces)
+  - [`trailing-whitespaces`](#trailing-whitespaces)
 - [License](#license)
 
 <!--TOC-->
@@ -49,24 +49,56 @@ Uses [CheckStyle](https://checkstyle.org/) linter against Java source codes. Con
 requires** CheckStyle JAR file to be given, instead of using system wide available application. This hook expects `java` binary to
 be in `$PATH`.
 
-#### Arguments ####
+#### Arguments
 
 * `--jar` path to the Checkstyle JAR file. If not specified, looks for `checkstyle-9.0-all.jar` in project directory.
 
-#### Example ####
+#### Example
 
 ```yaml
 - repo: https://github.com/MarcinOrlowski/pre-commit-hooks
   rev: main
   hooks:
-    # Checks modified Java files with Checkstyle linter.
     - id: checkstyle-jar
       args: [ '--jar=/path/to/checkstyle.jar' ]
 ```
 
-## `end-of-file` ##
+### `end-of-file`
 
 Makes sure files end in a newline and only a newline.
+
+#### Arguments
+
+* `--fix` if used, hook will correct invalid files in-place.
+
+#### Example
+
+```yaml
+- repo: https://github.com/MarcinOrlowski/pre-commit-hooks
+  rev: main
+  hooks:
+    - id: end-of-file
+      args: [ '--fix' ]
+```
+
+### `trailing-whitespaces`
+
+Ensures there's no line trailing whitespaces.
+
+#### Arguments
+
+* `--jar` path to the Checkstyle JAR file. If not specified, looks for `checkstyle-9.0-all.jar` in project directory.
+
+#### Example
+
+```yaml
+- repo: https://github.com/MarcinOrlowski/pre-commit-hooks
+  rev: main
+  hooks:
+    - id: checkstyle-jar
+      args: [ '--jar=/path/to/checkstyle.jar' ]
+```
+
 
 ## License ##
 
