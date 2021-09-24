@@ -38,7 +38,7 @@ Note, you must configure this hook before use. JAR file can be downloaded from t
 ## Arguments ##
 
 * `--jar-url` full URL to downloadable Checkstyle JAR file. If specified, and there's no cached JAR file found, the JAR file will be
-  automatically downloaded and cached locally.
+  automatically downloaded and cached locally. If not give, will try to download recent version automatically.
 * `--jar` path to the Checkstyle JAR file. If not specified, looks for `checkstyle-9.0-all.jar` in project directory.
 * `--cache` path to cache directory where downloaded JAR should be stored (defaults to `~/.cache/pre-commit/`).
 
