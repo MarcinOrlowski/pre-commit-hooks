@@ -28,9 +28,9 @@ Add to `.pre-commit-config.yaml` in your git repo:
     - id: checkstyle-jar
       # args: [ '--jar=/path/to/checkstyle.jar' ]
     - id: end-of-file
-      # args: [ '--fix' ]
+      # args: [ '--fix=yes' ]
     - id: trailing-whitespaces
-      # args: [ '--fix' ]
+      # args: [ '--fix=no' ]
 ```
 
 ---
