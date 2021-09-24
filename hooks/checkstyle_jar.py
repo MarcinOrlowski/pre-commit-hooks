@@ -60,11 +60,10 @@ def main(self, argv = None):
         parsed_url = parse.urlparse(args.jar_url)
         downloaded_jar_filename = pathlib.Path(parsed_url.path).name
         downloaded_jar_path = Path(args.cache).expanduser() / downloaded_jar_filename
-        download_tmp_filename = f'{downloaded_jar_filename}.tmp'
-        downloaded_jar_path = Path(args.cache).expanduser() / download_tmp_filename
+        downloaded_tmp_path = Path(args.cache).expanduser() / f'{downloaded_jar_filename}.tmp'
         if not downloaded_jar_path.exists():
             print(f'Downloading {downloaded_jar_filename} to {args.cache}...')
-            path, http = request.urlretrieve(args.jar_url, download_tmp_filename)
+            path, http = request.urlretrieve(args.jar_url, downloaded_tmp_path)
             tmp_path = Path(path)
             if not tmp_path.exists():
                 print(f'Failed to download JAR file: {args.jar_url}')
@@ -77,7 +76,7 @@ def main(self, argv = None):
     if not args.jar.exists():
         print(f'Checkstyle JAR file not found: {args.jar}')
         print('See download page: https://github.com/checkstyle/checkstyle/releases/')
-        print('or use --jar-url argument to point to downloadable JAR file.')
+        print('or use --jar-url and point to downloadable JAR file.')
         return RC_NO_JAR
 
     # https://checkstyle.sourceforge.io/cmdline.html#Download_and_Run
