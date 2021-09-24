@@ -1,15 +1,17 @@
-# pre-commit Git hooks
+![pre-commit-hooks logo](artwork/logo.png)
 
-Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework.
+Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework.
+
+---
 
 <!--TOC-->
 
 - [Configure pre-commit](#configure-pre-commit)
 - [Two ways to invoke pre-commit](#two-ways-to-invoke-pre-commit)
-- [Available hooks](#available-hooks)
-  - [`checkstyle-jar`](#checkstyle-jar)
-  - [`end-of-file`](#end-of-file)
-  - [`trailing-whitespaces`](#trailing-whitespaces)
+- [Available hooks](docs/README.md)
+  - [`checkstyle-jar`](docs/checkstyle-jar.md)
+  - [`end-of-file`](docs/end-of-file.md)
+  - [`trailing-whitespaces`](docs/trailing-whitespaces.md)
 - [License](#license)
 
 <!--TOC-->
@@ -40,65 +42,6 @@ If you want to invoke the checks as a git pre-commit hook, run:
 If you want to run the checks on-demand (outside of git hooks), run:
 
     pre-commit run --all-files --verbose
-
-## Available hooks
-
-### `checkstyle-jar`
-
-Uses [CheckStyle](https://checkstyle.org/) linter against Java source codes. Contrary to other implementations this one **
-requires** CheckStyle JAR file to be given, instead of using system wide available application. This hook expects `java` binary to
-be in `$PATH`.
-
-#### Arguments
-
-* `--jar` path to the Checkstyle JAR file. If not specified, looks for `checkstyle-9.0-all.jar` in project directory.
-
-#### Example
-
-```yaml
-- repo: https://github.com/MarcinOrlowski/pre-commit-hooks
-  rev: main
-  hooks:
-    - id: checkstyle-jar
-      args: [ '--jar=/path/to/checkstyle.jar' ]
-```
-
-### `end-of-file`
-
-Makes sure files end in a newline and only a newline.
-
-#### Arguments
-
-* `--fix` if used, hook will correct invalid files in-place.
-
-#### Example
-
-```yaml
-- repo: https://github.com/MarcinOrlowski/pre-commit-hooks
-  rev: main
-  hooks:
-    - id: end-of-file
-      args: [ '--fix' ]
-```
-
-### `trailing-whitespaces`
-
-Ensures there's no line trailing whitespaces.
-
-#### Arguments
-
-* `--jar` path to the Checkstyle JAR file. If not specified, looks for `checkstyle-9.0-all.jar` in project directory.
-
-#### Example
-
-```yaml
-- repo: https://github.com/MarcinOrlowski/pre-commit-hooks
-  rev: main
-  hooks:
-    - id: checkstyle-jar
-      args: [ '--jar=/path/to/checkstyle.jar' ]
-```
-
 
 ## License ##
 
