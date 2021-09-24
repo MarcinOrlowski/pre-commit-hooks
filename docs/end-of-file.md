@@ -30,7 +30,7 @@ Makes sure files end in a newline and only a newline.
 
 ## Arguments ##
 
-* `--fix` if used, hook will correct invalid files in-place.
+* `--fix` if used, hook will correct invalid files in-place. Supported values are `yes` and `no` (default).
 
 ## Examples ##
 
@@ -39,6 +39,6 @@ Makes sure files end in a newline and only a newline.
   rev: main
   hooks:
     - id: end-of-file
-      args: [ '--fix' ]
+      args: [ '--fix=yes' ]
 ```
 

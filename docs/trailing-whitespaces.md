@@ -30,7 +30,7 @@ Ensures there's no line trailing whitespaces.
 
 ## Arguments ##
 
-* `--jar` path to the Checkstyle JAR file. If not specified, looks for `checkstyle-9.0-all.jar` in project directory.
+* `--fix` if used, hook will correct invalid files in-place. Supported values are `yes` and `no` (default).
 
 ## Examples ##
 
@@ -39,5 +39,5 @@ Ensures there's no line trailing whitespaces.
   rev: main
   hooks:
     - id: trailing-whitespaces
-      args: [ '--fix' ]
+      args: [ '--fix=yes' ]
 ```

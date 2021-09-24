@@ -32,7 +32,8 @@ def _process_line(line: bytes, is_markdown: bool, chars: Optional[bytes]) -> byt
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument('--fix', dest = 'fix', action = 'store_true', help = 'Corrects invalid files in-place.', )
+    parser.add_argument('--fix', action = 'store', dest = 'fix', default = "no",
+                        help = 'Corrects invalid files in-place. Supported values: "yes", "no" (default).')
     parser.add_argument('--no-markdown-linebreak-ext', action = 'store_true', help = argparse.SUPPRESS)
     parser.add_argument('--markdown-linebreak-ext', action = 'append', default = [], metavar = '*|EXT[,EXT,...]',
                         help = 'Markdown extensions (or *) to not strip linebreak spaces. default: %(default)s')
@@ -40,6 +41,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                         help = 'The set of characters to strip from the end of lines. Defaults to all whitespace characters.')
     parser.add_argument('filenames', nargs = '*', help = 'Filenames to fix')
     args = parser.parse_args(argv)
+
+    if args.fix not in ["yes", "no"]:
+        print(f'Invalid --fix value: {args.fix}')
+        return 10
+    args.fix = args.fix == "yes"
 
     if args.no_markdown_linebreak_ext:
         print('--no-markdown-linebreak-ext now does nothing!')

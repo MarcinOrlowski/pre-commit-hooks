@@ -57,9 +57,16 @@ def fix_file(args, file_obj: IO[bytes]) -> int:
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument('--fix', action = 'store_true', dest = 'fix', help = 'Corrects invalid files in-place.')
+    parser.add_argument('--fix', action = 'store', dest = 'fix', default = "no",
+                        help = 'Corrects invalid files in-place. Supported values: "yes", "no" (default).')
     parser.add_argument('filenames', nargs = '*', help = 'Filenames to fix')
     args = parser.parse_args(argv)
+
+    if args.fix not in ["yes", "no"]:
+        print(f'Invalid --fix value: {args.fix}')
+        return 10
+    args.fix = args.fix == "yes"
+
 
     retv = 0
 
