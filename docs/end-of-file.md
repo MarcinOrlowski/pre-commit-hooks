@@ -10,21 +10,29 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 - [Two ways to invoke pre-commit](#two-ways-to-invoke-pre-commit)
 - [Available hooks](#available-hooks)
   - [`checkstyle-jar`](#checkstyle-jar)
-  - [`end-of-file`](#end-of-file)
+  - **end-of-file**
+    * [Summary](#summary)
+    * [Description](#description)
+    * [Arguments](#arguments)
+    * [Examples](#examples)
   - [`trailing-whitespaces`](#trailing-whitespaces)
 - [License](#license)
 
 <!--TOC-->
 
-### `end-of-file`
+## Summary ##
+
+* Hook ID: `end-of-file`
+
+## Description ##
 
 Makes sure files end in a newline and only a newline.
 
-#### Arguments
+## Arguments ##
 
 * `--fix` if used, hook will correct invalid files in-place.
 
-#### Example
+## Examples ##
 
 ```yaml
 - repo: https://github.com/MarcinOrlowski/pre-commit-hooks
