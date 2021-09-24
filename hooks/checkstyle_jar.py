@@ -10,7 +10,6 @@
 # Test invocation:
 #   pre-commit try-repo . checkstyle-jar --verbose --all-files
 """
-from __future__ import print_function
 
 import argparse
 import pathlib
@@ -29,16 +28,19 @@ RC_NO_JAR = 150
 def main(self, argv = None):
     parser = argparse.ArgumentParser()
     command_group = parser.add_mutually_exclusive_group()
-    command_group.add_argument('--cache', action = 'store', dest = 'cache', nargs = 1, metavar = 'DIR',
-                               default = ['~/.cache/pre-commit'],
-                               help = 'Path to shared cache directory to use to store downloaded JAR file.')
-    command_group.add_argument('--jar', action = 'store', dest = 'jar', nargs = 1, metavar = 'FILE',
-                               default = ['checkstyle-9.0-all.jar'],
-                               help = 'Path to Checkstyle JAR file, incl. JAR file name.')
-    command_group.add_argument('--jar-url', action = 'store', dest = 'jar_url', nargs = 1, metavar = 'URL',
-                               default = [
-                                   'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-9.0/checkstyle-9.0-all.jar'],
-                               help = 'URL to downloadable Checkstyle JAR file.')
+    command_group.add_argument(
+        '--cache', action = 'store', dest = 'cache', nargs = 1, metavar = 'DIR',
+        default = ['~/.cache/pre-commit'],
+        help = 'Path to shared cache directory to use to store downloaded JAR file.')
+    command_group.add_argument(
+        '--jar', action = 'store', dest = 'jar', nargs = 1, metavar = 'FILE',
+        help = 'Path to Checkstyle JAR file, incl. JAR file name.')
+    command_group.add_argument(
+        '--jar-url', action = 'store', dest = 'jar_url', nargs = 1, metavar = 'URL',
+        help = 'URL to downloadable Checkstyle JAR file.')
+    parser.add_argument(
+        '--config', dest = 'config', nargs = 1, action = 'store', metavar = "PATH", default = '/google_checks.xml',
+        help = 'Path to checkstyle config to use. Use "/google_checks.xml" or "/sun_checks.xml" to use built-in styles.')
     parser.add_argument('files', nargs = '*', help = 'Files to check.')
     args = parser.parse_args(argv)
 
@@ -46,9 +48,13 @@ def main(self, argv = None):
         args.jar_url = args.jar_url[0]
 
     # https://github.com/checkstyle/checkstyle/releases/
-    args.jar = Path(args.jar[0]).expanduser()
-    args.cache = Path(args.cache[0]).expanduser()
+    if args.jar:
+        args.jar = Path(args.jar[0]).expanduser()
 
+    if not args.jar_url and not args.jar:
+        args.jar_url = 'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-9.0/checkstyle-9.0-all.jar'
+
+    args.cache = Path(args.cache[0]).expanduser()
     if not args.cache.is_dir():
         print(f'The --cache must point to writable directory: {args.cache}')
         return RC_ERROR
@@ -75,12 +81,13 @@ def main(self, argv = None):
 
     if not args.jar.exists():
         print(f'Checkstyle JAR file not found: {args.jar}')
-        print('See download page: https://github.com/checkstyle/checkstyle/releases/')
-        print('or use --jar-url and point to downloadable JAR file.')
+        print(' '.join([
+            'See download page: https://github.com/checkstyle/checkstyle/releases/',
+            'or use --jar-url and point to downloadable JAR file.', ]))
         return RC_NO_JAR
 
     # https://checkstyle.sourceforge.io/cmdline.html#Download_and_Run
-    cmd = ['java', '-jar', args.jar, '-c', '/google_checks.xml'] + args.files
+    cmd = ['java', '-jar', args.jar, '-c', args.config] + args.files
 
     completed = run(cmd, capture_output = True)
     return_code = completed.returncode

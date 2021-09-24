@@ -41,6 +41,8 @@ Note, you must configure this hook before use. JAR file can be downloaded from t
   automatically downloaded and cached locally. If not give, will try to download recent version automatically.
 * `--jar` path to the Checkstyle JAR file. If not specified, looks for `checkstyle-9.0-all.jar` in project directory.
 * `--cache` path to cache directory where downloaded JAR should be stored (defaults to `~/.cache/pre-commit/`).
+* `--config` path to Checkstyle config file to use. Alternatively you can use `/google_checks.xml` and `/sun_checks.xml` to use
+  Checkstyle's built-in styles.
 
 ## Examples ##
 
