@@ -73,8 +73,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         _, extension = os.path.splitext(filename.lower())
         md = all_markdown or extension in md_exts
         if _fix_file(args, filename, md, chars):
-            print(f'Fixing {filename}')
-            return_code = 1
+            if args.fix:
+                print(f'Fixing {filename}')
+                return_code = 1
     return return_code
 
 
