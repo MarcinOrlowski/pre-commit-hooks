@@ -25,7 +25,7 @@ RC_DOWNLOAD_ERROR = 20
 RC_NO_JAR = 150
 
 
-def main(self, argv = None):
+def main(argv = None):
     parser = argparse.ArgumentParser()
     command_group = parser.add_mutually_exclusive_group()
     command_group.add_argument(

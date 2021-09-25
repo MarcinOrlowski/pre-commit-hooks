@@ -6,6 +6,9 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 # Changelog #
 
+* v1.2.1 (2021-09-25)
+  * Fixed `checkstyle-jar` argument handling.
+
 * v1.2.0 (2021-09-24)
   * `checkstyle-jar` now can automatically download and cache JAR file.
   * `checkstyle-jar` accepts `--config` argument now.

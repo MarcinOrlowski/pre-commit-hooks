@@ -12,7 +12,7 @@ setup(
     name = 'hooks',
     description = 'Some useful Git hooks for pre-commit',
     url = 'https://github.com/MarcinOrlowski/pre-commit-hooks',
-    version = '1.2.0',
+    version = '1.2.1',
 
     author = 'Marcin Orlowski',
 
