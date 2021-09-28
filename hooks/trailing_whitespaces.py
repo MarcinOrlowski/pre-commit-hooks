@@ -5,11 +5,11 @@ from typing import Sequence
 
 
 def _fix_file(args, filename: str, is_markdown: bool, chars: Optional[bytes]) -> bool:
-    with open(filename, mode = 'rb') as fh:
+    with open(filename, mode = 'r') as fh:
         lines = fh.readlines()
     new_lines = [_process_line(line, is_markdown, chars) for line in lines]
     if new_lines != lines and args.fix:
-        with open(filename, mode = 'wb') as fh:
+        with open(filename, mode = 'w') as fh:
             fh.write("\n".join(new_lines))
         return True
     return False
