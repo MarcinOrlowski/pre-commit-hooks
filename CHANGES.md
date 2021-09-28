@@ -6,6 +6,9 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 # Changelog #
 
+* v1.2.2 (2021-09-28)
+  * Changed the wat `trailing-whitespaces` handles files it fixes.
+
 * v1.2.1 (2021-09-25)
   * Fixed `checkstyle-jar` argument handling.
 
