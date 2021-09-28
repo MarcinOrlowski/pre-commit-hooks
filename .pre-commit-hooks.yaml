@@ -6,7 +6,7 @@
 #
 
 -   id: checkstyle-jar
-    name: Check that source code follows guidelines
+    name: Checkstyle Java source code
     description: "Runs CheckStyle JAR on modified Java files."
     entry: mor-checkstyle-jar
     language: python
@@ -14,7 +14,7 @@
     # additional_dependencies: [requests]
 
 -   id: trailing-whitespaces
-    name: Check there's no trailing whitespaces
+    name: Check there is no trailing whitespaces
     description: "Looks for trailing whitespace. Can fix it too!"
     entry: mor-trailing-whitespaces
     language: python
