@@ -4,10 +4,10 @@ from typing import Optional
 from typing import Sequence
 
 
-def _fix_file(args, filename: str, is_markdown: bool, chars: Optional[bytes]) -> bool:
+def fix_file(args, filename: str, is_markdown: bool, chars: Optional[bytes]) -> bool:
     with open(filename, mode = 'rb') as rfh:
         lines = rfh.readlines()
-        new_lines = [_process_line(line, is_markdown, chars) for line in lines]
+        new_lines = [process_line(line, is_markdown, chars) for line in lines]
         if new_lines != lines and args.fix:
             try:
                 with open(filename, mode = 'wb') as wfh:
@@ -19,7 +19,7 @@ def _fix_file(args, filename: str, is_markdown: bool, chars: Optional[bytes]) ->
     return False
 
 
-def _process_line(line: bytes, is_markdown: bool, chars: Optional[bytes]) -> bytes:
+def process_line(line: bytes, is_markdown: bool, chars: Optional[bytes]) -> bytes:
     if line[-2:] == b'\r\n':
         eol = b'\r\n'
         line = line[:-2]
@@ -76,7 +76,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     for filename in args.filenames:
         _, extension = os.path.splitext(filename.lower())
         md = all_markdown or extension in md_exts
-        if _fix_file(args, filename, md, chars):
+        if fix_file(args, filename, md, chars):
             if args.fix:
                 print(f'Fixed {filename}')
             else:
