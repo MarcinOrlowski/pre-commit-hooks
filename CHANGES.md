@@ -6,7 +6,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 # Changelog #
 
-* v1.3.0 (2021-09-28)
+* v1.3.0 (2021-09-29)
   * Added "safe save" mode to `trailing-whitespace` hook. 
 
 * v1.2.2 (2021-09-28)
