@@ -1,21 +1,49 @@
+#
+# pre-commit-hooks
+#
+# Copyright ©2021 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# https://github.com/MarcinOrlowski/pre-commit-hooks/
+#
+
 import argparse
 import os
 from typing import Optional
 from typing import Sequence
 
 
+def gen_tmp_filename(filename: str, suffix: str = 'tmp') -> str:
+    idx: int = 0
+    while True:
+        result_name: str = f'{filename}.{suffix}-{idx}'
+        if not os.path.exists(result_name):
+            return result_name
+        idx += 1
+
+
 def fix_file(args, filename: str, is_markdown: bool, chars: Optional[bytes]) -> bool:
-    with open(filename, mode = 'rb') as rfh:
-        lines = rfh.readlines()
-        new_lines = [process_line(line, is_markdown, chars) for line in lines]
-        if new_lines != lines and args.fix:
-            try:
-                with open(filename, mode = 'wb') as wfh:
-                    wfh.write("\n".join(new_lines))
-                    return True
-            except Exception as ex:
-                print(f'Exception: {ex}')
-                print(f'File: {filename}')
+    try:
+        with open(filename, mode = 'rb') as rfh:
+            lines = rfh.readlines()
+            new_lines = [process_line(line, is_markdown, chars) for line in lines]
+            if new_lines != lines and args.fix:
+                # save modified content to new file
+                save_filename = gen_tmp_filename(filename)
+                with open(save_filename, mode = 'wb') as wfh:
+                    _ = [wfh.write(line) for line in new_lines]
+
+                # rename original file to backup
+                bak_filename = gen_tmp_filename(filename, 'bak')
+                os.rename(filename, bak_filename)
+                # rename written file to replace original one
+                os.rename(save_filename, filename)
+                # remove backup file
+                os.unlink(bak_filename)
+
+                return True
+    except Exception as ex:
+        print(f'Exception: {ex}')
+        print(f'File: {filename}')
+
     return False
 
 
