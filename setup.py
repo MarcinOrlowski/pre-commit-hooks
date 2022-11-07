@@ -12,7 +12,7 @@ setup(
     name = 'hooks',
     description = 'Some useful Git hooks for pre-commit',
     url = 'https://github.com/MarcinOrlowski/pre-commit-hooks',
-    version = '1.3.0',
+    version = '1.3.1',
 
     author = 'Marcin Orlowski',
 
@@ -24,6 +24,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy',
     ],
