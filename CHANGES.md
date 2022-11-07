@@ -7,7 +7,8 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 # Changelog #
 
 * v1.3.1 (2022-11-07)
-  * Updated docs to include `exclude_types` example (i.f. for binaries).  
+  * Updated docs to include `exclude_types` example (i.f. for binaries).
+  * Bumped default version of Checkstyle to 10.4
 
 
 * v1.3.0 (2021-09-29)

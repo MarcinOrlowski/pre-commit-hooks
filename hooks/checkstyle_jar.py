@@ -52,7 +52,7 @@ def main(argv = None):
         args.jar = Path(args.jar[0]).expanduser()
 
     if not args.jar_url and not args.jar:
-        args.jar_url = 'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-9.0/checkstyle-9.0-all.jar'
+        args.jar_url = 'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.4/checkstyle-10.4-all.jar'
 
     args.cache = Path(args.cache[0]).expanduser()
     if not args.cache.is_dir():
