@@ -4,7 +4,7 @@
 # Bridges Checkstyle code linter with pre-commit. This hook requires
 # JAR version of Checkstyle and Java environment installed (in $PATH)
 #
-# Copyright ©2021 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2021-2022 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/pre-commit-hooks/
 #
 # Test invocation:

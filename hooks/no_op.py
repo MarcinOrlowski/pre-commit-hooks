@@ -6,7 +6,7 @@
 # because pre-commit do not allow `.pre-commit-options.yaml` to
 # feature repository with no hook from it used.
 #
-# Copyright ©2021 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2021-2022 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/pre-commit-hooks/
 #
 """
