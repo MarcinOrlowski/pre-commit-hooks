@@ -7,7 +7,9 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 # Changelog #
 
 * dev
-  * Added type hints to hooks code.
+  * Added type hints to hooks code.umped
+  * Bumped Checkstyle to 10.23.1
+
 
 * v1.3.1 (2022-11-07)
   * Updated docs to include `exclude_types` example (i.f. for binaries).

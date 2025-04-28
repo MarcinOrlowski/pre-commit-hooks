@@ -55,8 +55,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         args.jar: Path = Path(args.jar[0]).expanduser()
 
     if not args.jar_url and not args.jar:
-        args.jar_url: str = 'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.4/checkstyle-10.4-all.jar'
-
+        args.jar_url: str = 'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.23.1/checkstyle-10.23.1-all.jar'
     args.cache: Path = Path(args.cache[0]).expanduser()
     if not args.cache.is_dir():
         print(f'The --cache must point to writable directory: {args.cache}')
