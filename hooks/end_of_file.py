@@ -18,7 +18,7 @@ from typing import Optional
 from typing import Sequence
 
 
-def fix_file(args, file_obj: IO[bytes]) -> int:
+def fix_file(args: argparse.Namespace, file_obj: IO[bytes]) -> int:
     """
     Test for newline at end of file Empty files will throw IOError here
 
@@ -29,7 +29,7 @@ def fix_file(args, file_obj: IO[bytes]) -> int:
     except OSError:
         return 0
 
-    last_character = file_obj.read(1)
+    last_character: bytes = file_obj.read(1)
     # last_character will be '' for an empty file
     if last_character not in {b'\n', b'\r'} and last_character != b'':
         if args.fix:
@@ -54,8 +54,8 @@ def fix_file(args, file_obj: IO[bytes]) -> int:
 
     # Our current position is at the end of the file just before any amount of
     # newlines.  If we find extraneous newlines, then backtrack and trim them.
-    position = file_obj.tell()
-    remaining = file_obj.read()
+    position: int = file_obj.tell()
+    remaining: bytes = file_obj.read()
     for sequence in (b'\n', b'\r\n', b'\r'):
         if remaining == sequence:
             return 0
@@ -69,24 +69,24 @@ def fix_file(args, file_obj: IO[bytes]) -> int:
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
-    parser = argparse.ArgumentParser()
+    parser: argparse.ArgumentParser = argparse.ArgumentParser()
     parser.add_argument('--fix', action = 'store', dest = 'fix', default = "no",
                         help = 'Corrects invalid files in-place. Supported values: "yes", "no" (default).')
     parser.add_argument('filenames', nargs = '*', help = 'Filenames to fix')
-    args = parser.parse_args(argv)
+    args: argparse.Namespace = parser.parse_args(argv)
 
     if args.fix not in ["yes", "no"]:
         print(f'Invalid --fix value: {args.fix}')
         return 10
-    args.fix = args.fix == "yes"
+    args.fix: bool = args.fix == "yes"
 
 
-    retv = 0
+    retv: int = 0
 
     for filename in args.filenames:
         # Read as binary so we can read byte-by-byte
         with open(filename, 'rb+') as file_obj:
-            ret_for_file = fix_file(args, file_obj)
+            ret_for_file: int = fix_file(args, file_obj)
             if ret_for_file:
                 print(f'Fixing {filename}')
             retv |= ret_for_file

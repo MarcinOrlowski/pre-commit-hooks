@@ -9,6 +9,8 @@ import argparse
 import os
 from typing import Optional
 from typing import Sequence
+from typing import List
+from typing import IO
 
 
 def gen_tmp_filename(filename: str, suffix: str = 'tmp') -> str:
@@ -20,19 +22,19 @@ def gen_tmp_filename(filename: str, suffix: str = 'tmp') -> str:
         idx += 1
 
 
-def fix_file(args, filename: str, is_markdown: bool, chars: Optional[bytes]) -> bool:
+def fix_file(args: argparse.Namespace, filename: str, is_markdown: bool, chars: Optional[bytes]) -> bool:
     try:
         with open(filename, mode = 'rb') as rfh:
-            lines = rfh.readlines()
-            new_lines = [process_line(line, is_markdown, chars) for line in lines]
+            lines: List[bytes] = rfh.readlines()
+            new_lines: List[bytes] = [process_line(line, is_markdown, chars) for line in lines]
             if new_lines != lines and args.fix:
                 # save modified content to new file
-                save_filename = gen_tmp_filename(filename)
+                save_filename: str = gen_tmp_filename(filename)
                 with open(save_filename, mode = 'wb') as wfh:
                     _ = [wfh.write(line) for line in new_lines]
 
                 # rename original file to backup
-                bak_filename = gen_tmp_filename(filename, 'bak')
+                bak_filename: str = gen_tmp_filename(filename, 'bak')
                 os.rename(filename, bak_filename)
                 # rename written file to replace original one
                 os.rename(save_filename, filename)
@@ -49,13 +51,13 @@ def fix_file(args, filename: str, is_markdown: bool, chars: Optional[bytes]) -> 
 
 def process_line(line: bytes, is_markdown: bool, chars: Optional[bytes]) -> bytes:
     if line[-2:] == b'\r\n':
-        eol = b'\r\n'
+        eol: bytes = b'\r\n'
         line = line[:-2]
     elif line[-1:] == b'\n':
-        eol = b'\n'
+        eol: bytes = b'\n'
         line = line[:-1]
     else:
-        eol = b''
+        eol: bytes = b''
     # preserve trailing two-space for non-blank lines in markdown files
     if is_markdown and (not line.isspace()) and line.endswith(b'  '):
         return line[:-2].rstrip(chars) + b'  ' + eol
@@ -63,7 +65,7 @@ def process_line(line: bytes, is_markdown: bool, chars: Optional[bytes]) -> byte
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
-    parser = argparse.ArgumentParser()
+    parser: argparse.ArgumentParser = argparse.ArgumentParser()
     parser.add_argument('--fix', action = 'store', dest = 'fix', default = "no",
                         help = 'Corrects invalid files in-place. Supported values: "yes", "no" (default).')
     parser.add_argument('--no-markdown-linebreak-ext', action = 'store_true', help = argparse.SUPPRESS)
@@ -72,22 +74,22 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument('--chars',
                         help = 'The set of characters to strip from the end of lines. Defaults to all whitespace characters.')
     parser.add_argument('filenames', nargs = '*', help = 'Filenames to fix')
-    args = parser.parse_args(argv)
+    args: argparse.Namespace = parser.parse_args(argv)
 
     if args.fix not in ["yes", "no"]:
         print(f'Invalid --fix value: {args.fix}')
         return 10
-    args.fix = args.fix == "yes"
+    args.fix: bool = args.fix == "yes"
 
     if args.no_markdown_linebreak_ext:
         print('--no-markdown-linebreak-ext now does nothing!')
 
-    md_args = args.markdown_linebreak_ext
+    md_args: List[str] = args.markdown_linebreak_ext
     if '' in md_args:
         parser.error('--markdown-linebreak-ext requires a non-empty argument')
-    all_markdown = '*' in md_args
+    all_markdown: bool = '*' in md_args
     # normalize extensions; split at ',', lowercase, and force 1 leading '.'
-    md_exts = [
+    md_exts: List[str] = [
         '.' + x.lower().lstrip('.') for x in ','.join(md_args).split(',')
     ]
 
@@ -99,11 +101,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
                 f'{ext!r} (has . / \\ :)\n'
                 f"  (probably filename; use '--markdown-linebreak-ext=EXT')",
             )
-    chars = None if args.chars is None else args.chars.encode()
-    return_code = 0
+    chars: Optional[bytes] = None if args.chars is None else args.chars.encode()
+    return_code: int = 0
     for filename in args.filenames:
-        _, extension = os.path.splitext(filename.lower())
-        md = all_markdown or extension in md_exts
+        _, extension: str = os.path.splitext(filename.lower())
+        md: bool = all_markdown or extension in md_exts
         if fix_file(args, filename, md, chars):
             if args.fix:
                 print(f'Fixed {filename}')

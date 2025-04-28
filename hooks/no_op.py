@@ -12,9 +12,10 @@
 """
 
 import sys
+from typing import Optional, Sequence
 
 
-def main(argv = None):
+def main(argv: Optional[Sequence[str]] = None) -> int:
     return 0
 
 
