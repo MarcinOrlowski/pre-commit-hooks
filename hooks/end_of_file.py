@@ -1,3 +1,16 @@
+"""
+# checkstyle-jar
+#
+# Bridges Checkstyle code linter with pre-commit. This hook requires
+# JAR version of Checkstyle and Java environment installed (in $PATH)
+#
+# Copyright ©2021-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# https://github.com/MarcinOrlowski/pre-commit-hooks/
+#
+# Test invocation:
+#   pre-commit try-repo . checkstyle-jar --verbose --all-files
+"""
+
 import argparse
 import os
 from typing import IO

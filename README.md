@@ -62,5 +62,5 @@ To try your hooks with all the files present.
 
 ## License ##
 
-* Written and copyrighted &copy;2021-2022 by Marcin Orlowski <mail (#) marcinorlowski (.) com>
+* Written and copyrighted &copy;2021-2025 by Marcin Orlowski <mail (#) marcinorlowski (.) com>
 * This is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
