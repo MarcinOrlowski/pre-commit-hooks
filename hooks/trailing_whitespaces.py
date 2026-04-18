@@ -88,8 +88,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     all_markdown: bool = '*' in md_args
     # normalize extensions; split at ',', lowercase, and force 1 leading '.'
     md_exts: List[str] = [
-        '.' + x.lower().lstrip('.') for x in ','.join(md_args).split(',')
-    ]
+        '.' + x.lower().lstrip('.') for x in ','.join(md_args).split(',') if x
+    ] if md_args else []
 
     # reject probable "eaten" filename as extension: skip leading '.' with [1:]
     for ext in md_exts:
