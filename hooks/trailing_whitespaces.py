@@ -104,7 +104,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     chars: Optional[bytes] = None if args.chars is None else args.chars.encode()
     return_code: int = 0
     for filename in args.filenames:
-        _, extension: str = os.path.splitext(filename.lower())
+        _, extension = os.path.splitext(filename.lower())
         md: bool = all_markdown or extension in md_exts
         if fix_file(args, filename, md, chars):
             if args.fix:
