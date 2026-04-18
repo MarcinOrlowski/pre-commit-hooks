@@ -39,6 +39,7 @@ setup(
             'mor-checkstyle-jar = hooks.checkstyle_jar:main',
             'mor-trailing-whitespaces = hooks.trailing_whitespaces:main',
             'mor-end-of-file = hooks.end_of_file:main',
+            'mor-branch-name = hooks.branch_name:main',
             'mor-no-op = hooks.no_op:main',
         ],
     },
