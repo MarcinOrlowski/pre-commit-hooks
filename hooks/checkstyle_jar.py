@@ -56,21 +56,19 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
     if not args.jar_url and not args.jar:
         args.jar_url: str = 'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.23.1/checkstyle-10.23.1-all.jar'
-    args.cache: Path = Path(args.cache[0]).expanduser()
-    if not args.cache.is_dir():
-        print(f'The --cache must point to writable directory: {args.cache}')
-        return RC_ERROR
 
     if not args.files:
         return RC_OK
 
     if args.jar_url:
+        cache_dir: Path = Path(args.cache[0]).expanduser()
+        cache_dir.mkdir(parents = True, exist_ok = True)
         parsed_url: ParseResult = parse.urlparse(args.jar_url)
         downloaded_jar_filename: str = pathlib.Path(parsed_url.path).name
-        downloaded_jar_path: Path = Path(args.cache).expanduser() / downloaded_jar_filename
-        downloaded_tmp_path: Path = Path(args.cache).expanduser() / f'{downloaded_jar_filename}.tmp'
+        downloaded_jar_path: Path = cache_dir / downloaded_jar_filename
+        downloaded_tmp_path: Path = cache_dir / f'{downloaded_jar_filename}.tmp'
         if not downloaded_jar_path.exists():
-            print(f'Downloading {downloaded_jar_filename} to {args.cache}...')
+            print(f'Downloading {downloaded_jar_filename} to {cache_dir}...')
             path: str
             http: HTTPMessage
             path, http = request.urlretrieve(args.jar_url, downloaded_tmp_path)
