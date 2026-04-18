@@ -13,6 +13,7 @@
 
 import argparse
 import os
+import sys
 from typing import IO
 from typing import Optional
 from typing import Sequence
@@ -95,4 +96,4 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
 
 if __name__ == '__main__':
-    exit(main())
+    sys.exit(main(sys.argv[1:]))
