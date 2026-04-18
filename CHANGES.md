@@ -8,7 +8,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 * dev
   * Added type hints to hooks code.umped
-  * Bumped Checkstyle to 10.23.1
+  * Bumped Checkstyle to 13.4.0
   * Corrected `trailing-whitespaces` hook's syntax
   * Updatd `end-of-file` hook docs
   * Fixed `checkstyle-jar` cache-dir handling when `--jar` is used

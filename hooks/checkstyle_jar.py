@@ -55,7 +55,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         args.jar: Path = Path(args.jar[0]).expanduser()
 
     if not args.jar_url and not args.jar:
-        args.jar_url: str = 'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.23.1/checkstyle-10.23.1-all.jar'
+        args.jar_url: str = 'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-13.4.0/checkstyle-13.4.0-all.jar'
 
     if not args.files:
         return RC_OK
