@@ -8,6 +8,11 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 - [Configure pre-commit](#configure-pre-commit)
 - [Two ways to invoke pre-commit](#two-ways-to-invoke-pre-commit)
+- **Available hooks**
+  * [branch-name](docs/branch-name.md) — verifies the current Git branch name matches a required regular expression (runs at `pre-push`).
+  * [checkstyle-jar](docs/checkstyle-jar.md) — runs the Checkstyle JAR against modified Java files.
+  * [end-of-file](docs/end-of-file.md) — ensures each file is empty or ends with exactly one newline.
+  * [trailing-whitespaces](docs/trailing-whitespaces.md) — detects (and optionally strips) trailing whitespace.
 - [License](#license)
 
 <!--TOC-->
@@ -24,6 +29,9 @@ Add `.pre-commit-config.yaml` config file to in your project:
 - repo: https://github.com/MarcinOrlowski/pre-commit-hooks
   rev: 1.0.0  # or any specific git tag
   hooks:
+    - id: branch-name
+      stages: [ pre-push ]
+      # args: [ '--config=.branch-name.yaml' ]
     - id: checkstyle-jar
       # args: [ '--jar=/path/to/checkstyle.jar' ]
     - id: end-of-file
