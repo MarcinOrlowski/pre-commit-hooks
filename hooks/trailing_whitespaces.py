@@ -23,30 +23,23 @@ def gen_tmp_filename(filename: str, suffix: str = 'tmp') -> str:
 
 
 def fix_file(args: argparse.Namespace, filename: str, is_markdown: bool, chars: Optional[bytes]) -> bool:
-    try:
-        with open(filename, mode = 'rb') as rfh:
-            lines: List[bytes] = rfh.readlines()
-            new_lines: List[bytes] = [process_line(line, is_markdown, chars) for line in lines]
-            if new_lines != lines and args.fix:
-                # save modified content to new file
-                save_filename: str = gen_tmp_filename(filename)
-                with open(save_filename, mode = 'wb') as wfh:
-                    _ = [wfh.write(line) for line in new_lines]
+    with open(filename, mode = 'rb') as rfh:
+        lines: List[bytes] = rfh.readlines()
+    new_lines: List[bytes] = [process_line(line, is_markdown, chars) for line in lines]
+    if new_lines == lines:
+        return False
 
-                # rename original file to backup
-                bak_filename: str = gen_tmp_filename(filename, 'bak')
-                os.rename(filename, bak_filename)
-                # rename written file to replace original one
-                os.rename(save_filename, filename)
-                # remove backup file
-                os.unlink(bak_filename)
+    if args.fix:
+        save_filename: str = gen_tmp_filename(filename)
+        with open(save_filename, mode = 'wb') as wfh:
+            wfh.writelines(new_lines)
 
-                return True
-    except Exception as ex:
-        print(f'Exception: {ex}')
-        print(f'File: {filename}')
+        bak_filename: str = gen_tmp_filename(filename, 'bak')
+        os.rename(filename, bak_filename)
+        os.rename(save_filename, filename)
+        os.unlink(bak_filename)
 
-    return False
+    return True
 
 
 def process_line(line: bytes, is_markdown: bool, chars: Optional[bytes]) -> bytes:
@@ -106,7 +99,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     for filename in args.filenames:
         _, extension = os.path.splitext(filename.lower())
         md: bool = all_markdown or extension in md_exts
-        if fix_file(args, filename, md, chars):
+        try:
+            needs_fix: bool = fix_file(args, filename, md, chars)
+        except OSError as ex:
+            print(f'[ERROR] {filename}: {ex}')
+            return_code = 1
+            continue
+        if needs_fix:
             if args.fix:
                 print(f'Fixed {filename}')
             else:

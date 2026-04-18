@@ -14,6 +14,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
   * Fixed `checkstyle-jar` cache-dir handling when `--jar` is used
   * Declared minimum Python 3.7 and refreshed version classifiers
   * Added timeout to `checkstyle-jar` JAR download
+  * Fixed `trailing-whitespaces` detect-only mode and error handling
 
 
 * v1.3.1 (2022-11-07)
