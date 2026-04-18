@@ -8,11 +8,6 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 - [Configure pre-commit](#configure-pre-commit)
 - [Two ways to invoke pre-commit](#two-ways-to-invoke-pre-commit)
-- **Available hooks**
-  * [checkstyle-jar](docs/checkstyle-jar.md)
-  * [end-of-file](docs/end-of-file.md)
-  * [trailing-whitespaces](docs/trailing-whitespaces.md)
-
 - [License](#license)
 
 <!--TOC-->
@@ -62,5 +57,5 @@ To try your hooks with all the files present.
 
 ## License ##
 
-* Written and copyrighted &copy;2021-2022 by Marcin Orlowski <mail (#) marcinorlowski (.) com>
+* Written and copyrighted &copy;2021-2026 by Marcin Orlowski <mail (#) marcinorlowski (.) com>
 * This is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

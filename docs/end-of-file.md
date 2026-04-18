@@ -11,6 +11,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 - [Configure pre-commit](../README.md#configure-pre-commit)
 - [Two ways to invoke pre-commit](../README.md#two-ways-to-invoke-pre-commit)
 - **Available hooks**
+  - [branch-name](branch-name.md)
   - [checkstyle-jar](checkstyle-jar.md)
   - **end-of-file**
   - [trailing-whitespaces](trailing-whitespaces.md)

@@ -6,15 +6,16 @@
 # because pre-commit do not allow `.pre-commit-options.yaml` to
 # feature repository with no hook from it used.
 #
-# Copyright ©2021-2022 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2021-2026 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/pre-commit-hooks/
 #
 """
 
 import sys
+from typing import Optional, Sequence
 
 
-def main(argv = None):
+def main(argv: Optional[Sequence[str]] = None) -> int:
     return 0
 
 

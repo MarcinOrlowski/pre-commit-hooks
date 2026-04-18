@@ -1,7 +1,7 @@
 #
 # pre-commit-hooks
 #
-# Copyright ©2021-2022 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2021-2026 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/pre-commit-hooks/
 #
 
@@ -27,9 +27,18 @@
     language: python
     types: [file]
 
+-   id: branch-name
+    name: Check current branch name
+    description: "Verifies current Git branch name matches a required regular expression."
+    entry: mor-branch-name
+    language: python
+    always_run: true
+    pass_filenames: false
+    stages: [pre-push]
+    additional_dependencies: [pyyaml]
+
 -   id: no-op
     name: Do-nothing hook
     description: "[DEV] Dummy NO-OP hook."
     entry: mor-no-op
     language: python
-
