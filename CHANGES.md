@@ -10,6 +10,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
   * Added type hints to hooks code.umped
   * Bumped Checkstyle to 10.23.1
   * Corrected `trailing-whitespaces` hook's syntax
+  * Updatd `end-of-file` hook docs
 
 
 * v1.3.1 (2022-11-07)
