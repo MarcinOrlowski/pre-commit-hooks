@@ -31,7 +31,6 @@ Add `.pre-commit-config.yaml` config file to in your project:
   hooks:
     - id: branch-name
       stages: [ pre-push ]
-      # args: [ '--config=.branch-name.yaml' ]
     - id: checkstyle-jar
       # args: [ '--jar=/path/to/checkstyle.jar' ]
     - id: end-of-file
