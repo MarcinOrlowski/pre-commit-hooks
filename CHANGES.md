@@ -8,7 +8,14 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 * dev
   * Added type hints to hooks code.umped
-  * Bumped Checkstyle to 10.23.1
+  * Bumped Checkstyle to 13.4.0
+  * Corrected `trailing-whitespaces` hook's syntax
+  * Updatd `end-of-file` hook docs
+  * Fixed `checkstyle-jar` cache-dir handling when `--jar` is used
+  * Declared minimum Python 3.7 and refreshed version classifiers
+  * Added timeout to `checkstyle-jar` JAR download
+  * Fixed `trailing-whitespaces` detect-only mode and error handling
+  * Hardened `trailing-whitespaces` temp-file naming against races
 
 
 * v1.3.1 (2022-11-07)

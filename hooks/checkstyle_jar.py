@@ -13,12 +13,12 @@
 
 import argparse
 import pathlib
+import shutil
 import sys
 from pathlib import Path
 from subprocess import run, CompletedProcess
 from urllib import request, parse
 from urllib.parse import ParseResult
-from http.client import HTTPMessage
 from typing import List, Optional, Sequence
 
 RC_OK: int = 0
@@ -26,6 +26,8 @@ RC_ERROR: int = 1
 RC_FAKE_ERROR_CODE: int = 10
 RC_DOWNLOAD_ERROR: int = 20
 RC_NO_JAR: int = 150
+
+DOWNLOAD_TIMEOUT_SECS: int = 120
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -55,30 +57,29 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         args.jar: Path = Path(args.jar[0]).expanduser()
 
     if not args.jar_url and not args.jar:
-        args.jar_url: str = 'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-10.23.1/checkstyle-10.23.1-all.jar'
-    args.cache: Path = Path(args.cache[0]).expanduser()
-    if not args.cache.is_dir():
-        print(f'The --cache must point to writable directory: {args.cache}')
-        return RC_ERROR
+        args.jar_url: str = 'https://github.com/checkstyle/checkstyle/releases/download/checkstyle-13.4.0/checkstyle-13.4.0-all.jar'
 
     if not args.files:
         return RC_OK
 
     if args.jar_url:
+        cache_dir: Path = Path(args.cache[0]).expanduser()
+        cache_dir.mkdir(parents = True, exist_ok = True)
         parsed_url: ParseResult = parse.urlparse(args.jar_url)
         downloaded_jar_filename: str = pathlib.Path(parsed_url.path).name
-        downloaded_jar_path: Path = Path(args.cache).expanduser() / downloaded_jar_filename
-        downloaded_tmp_path: Path = Path(args.cache).expanduser() / f'{downloaded_jar_filename}.tmp'
+        downloaded_jar_path: Path = cache_dir / downloaded_jar_filename
+        downloaded_tmp_path: Path = cache_dir / f'{downloaded_jar_filename}.tmp'
         if not downloaded_jar_path.exists():
-            print(f'Downloading {downloaded_jar_filename} to {args.cache}...')
-            path: str
-            http: HTTPMessage
-            path, http = request.urlretrieve(args.jar_url, downloaded_tmp_path)
-            tmp_path: Path = Path(path)
-            if not tmp_path.exists():
-                print(f'Failed to download JAR file: {args.jar_url}')
+            print(f'Downloading {downloaded_jar_filename} to {cache_dir}...')
+            try:
+                with request.urlopen(args.jar_url, timeout = DOWNLOAD_TIMEOUT_SECS) as resp, \
+                        downloaded_tmp_path.open('wb') as out:
+                    shutil.copyfileobj(resp, out)
+            except Exception as ex:
+                downloaded_tmp_path.unlink(missing_ok = True)
+                print(f'Failed to download JAR file: {args.jar_url} ({ex})')
                 return RC_DOWNLOAD_ERROR
-            tmp_path.rename(downloaded_jar_path)
+            downloaded_tmp_path.rename(downloaded_jar_path)
 
         if downloaded_jar_path.exists():
             args.jar: Path = downloaded_jar_path

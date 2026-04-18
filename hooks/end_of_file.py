@@ -1,18 +1,19 @@
 """
-# checkstyle-jar
+# end-of-file
 #
-# Bridges Checkstyle code linter with pre-commit. This hook requires
-# JAR version of Checkstyle and Java environment installed (in $PATH)
+# Ensures that a file is either empty, or ends with exactly one newline.
+# Optionally rewrites offending files in place when --fix=yes is given.
 #
 # Copyright ©2021-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/pre-commit-hooks/
 #
 # Test invocation:
-#   pre-commit try-repo . checkstyle-jar --verbose --all-files
+#   pre-commit try-repo . end-of-file --verbose --all-files
 """
 
 import argparse
 import os
+import sys
 from typing import IO
 from typing import Optional
 from typing import Sequence
@@ -95,4 +96,4 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
 
 if __name__ == '__main__':
-    exit(main())
+    sys.exit(main(sys.argv[1:]))
