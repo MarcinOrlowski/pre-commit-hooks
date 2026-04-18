@@ -4,7 +4,7 @@
 # Ensures that a file is either empty, or ends with exactly one newline.
 # Optionally rewrites offending files in place when --fix=yes is given.
 #
-# Copyright ©2021-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2021-2026 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/pre-commit-hooks/
 #
 # Test invocation:

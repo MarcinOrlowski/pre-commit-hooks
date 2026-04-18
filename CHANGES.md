@@ -6,7 +6,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 # Changelog #
 
-* dev
+* v1.4.0 (2026-04-18)
   * Added `branch-name` hook to validate current branch name against a regexp at `pre-push` stage.
   * Added type hints to hooks code.umped
   * Bumped Checkstyle to 13.4.0

@@ -1,7 +1,7 @@
 #
 # pre-commit-hooks
 #
-# Copyright ©2021-2025 Marcin Orlowski <mail [@] MarcinOrlowski.com>
+# Copyright ©2021-2026 Marcin Orlowski <mail [@] MarcinOrlowski.com>
 # https://github.com/MarcinOrlowski/pre-commit-hooks/
 #
 
