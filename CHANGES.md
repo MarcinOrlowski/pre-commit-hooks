@@ -13,6 +13,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
   * Updatd `end-of-file` hook docs
   * Fixed `checkstyle-jar` cache-dir handling when `--jar` is used
   * Declared minimum Python 3.7 and refreshed version classifiers
+  * Added timeout to `checkstyle-jar` JAR download
 
 
 * v1.3.1 (2022-11-07)

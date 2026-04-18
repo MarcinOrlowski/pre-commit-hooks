@@ -13,12 +13,12 @@
 
 import argparse
 import pathlib
+import shutil
 import sys
 from pathlib import Path
 from subprocess import run, CompletedProcess
 from urllib import request, parse
 from urllib.parse import ParseResult
-from http.client import HTTPMessage
 from typing import List, Optional, Sequence
 
 RC_OK: int = 0
@@ -26,6 +26,8 @@ RC_ERROR: int = 1
 RC_FAKE_ERROR_CODE: int = 10
 RC_DOWNLOAD_ERROR: int = 20
 RC_NO_JAR: int = 150
+
+DOWNLOAD_TIMEOUT_SECS: int = 120
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
@@ -69,14 +71,15 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         downloaded_tmp_path: Path = cache_dir / f'{downloaded_jar_filename}.tmp'
         if not downloaded_jar_path.exists():
             print(f'Downloading {downloaded_jar_filename} to {cache_dir}...')
-            path: str
-            http: HTTPMessage
-            path, http = request.urlretrieve(args.jar_url, downloaded_tmp_path)
-            tmp_path: Path = Path(path)
-            if not tmp_path.exists():
-                print(f'Failed to download JAR file: {args.jar_url}')
+            try:
+                with request.urlopen(args.jar_url, timeout = DOWNLOAD_TIMEOUT_SECS) as resp, \
+                        downloaded_tmp_path.open('wb') as out:
+                    shutil.copyfileobj(resp, out)
+            except Exception as ex:
+                downloaded_tmp_path.unlink(missing_ok = True)
+                print(f'Failed to download JAR file: {args.jar_url} ({ex})')
                 return RC_DOWNLOAD_ERROR
-            tmp_path.rename(downloaded_jar_path)
+            downloaded_tmp_path.rename(downloaded_jar_path)
 
         if downloaded_jar_path.exists():
             args.jar: Path = downloaded_jar_path
