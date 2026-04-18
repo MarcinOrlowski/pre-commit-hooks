@@ -17,9 +17,13 @@ def gen_tmp_filename(filename: str, suffix: str = 'tmp') -> str:
     idx: int = 0
     while True:
         result_name: str = f'{filename}.{suffix}-{idx}'
-        if not os.path.exists(result_name):
-            return result_name
-        idx += 1
+        try:
+            fd: int = os.open(result_name, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+        except FileExistsError:
+            idx += 1
+            continue
+        os.close(fd)
+        return result_name
 
 
 def fix_file(args: argparse.Namespace, filename: str, is_markdown: bool, chars: Optional[bytes]) -> bool:

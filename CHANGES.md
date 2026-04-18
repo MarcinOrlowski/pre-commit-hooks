@@ -15,6 +15,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
   * Declared minimum Python 3.7 and refreshed version classifiers
   * Added timeout to `checkstyle-jar` JAR download
   * Fixed `trailing-whitespaces` detect-only mode and error handling
+  * Hardened `trailing-whitespaces` temp-file naming against races
 
 
 * v1.3.1 (2022-11-07)
