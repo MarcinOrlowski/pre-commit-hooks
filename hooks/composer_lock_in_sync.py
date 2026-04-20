@@ -43,9 +43,11 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         return 0
 
     print('composer.lock is older than composer.json and must be regenerated.')
-    print('Run one of:')
+    print('To rebuild the lock file, run one of:')
     print('  composer update --lock')
     print('  composer update --lock --ignore-platform-reqs')
+    print('')
+    print('NOTE: when using containers, the above command should be run inside the container.')
     return 1
 
 
