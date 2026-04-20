@@ -9,6 +9,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 * v1.5.0 (2026-04-20)
   * Added `composer-lock-in-sync` hook checks if `composer.lock` is not older than `composer.json`.
 
+
 * v1.4.0 (2026-04-18)
   * Added `branch-name` hook to validate current branch name against a regexp at `pre-push` stage.
   * Added type hints to hooks code.umped
