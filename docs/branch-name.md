@@ -13,6 +13,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 - **Available hooks**
   - **branch-name**
   - [checkstyle-jar](checkstyle-jar.md)
+  - [composer-lock-in-sync](composer-lock-in-sync.md)
   - [end-of-file](end-of-file.md)
   - [trailing-whitespaces](trailing-whitespaces.md)
 

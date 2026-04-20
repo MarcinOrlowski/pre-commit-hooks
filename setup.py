@@ -40,6 +40,7 @@ setup(
             'mor-trailing-whitespaces = hooks.trailing_whitespaces:main',
             'mor-end-of-file = hooks.end_of_file:main',
             'mor-branch-name = hooks.branch_name:main',
+            'mor-composer-lock-in-sync = hooks.composer_lock_in_sync:main',
             'mor-no-op = hooks.no_op:main',
         ],
     },
