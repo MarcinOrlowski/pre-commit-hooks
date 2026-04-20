@@ -37,6 +37,14 @@
     stages: [pre-push]
     additional_dependencies: [pyyaml]
 
+-   id: composer-lock-in-sync
+    name: Check composer.lock is in sync with composer.json
+    description: "Fails when composer.lock is older than composer.json."
+    entry: mor-composer-lock-in-sync
+    language: python
+    files: '^(composer\.json|composer\.lock)$'
+    pass_filenames: false
+
 -   id: no-op
     name: Do-nothing hook
     description: "[DEV] Dummy NO-OP hook."
