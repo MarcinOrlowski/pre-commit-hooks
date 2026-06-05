@@ -12,7 +12,7 @@ setup(
     name = 'hooks',
     description = 'Some useful Git hooks for pre-commit',
     url = 'https://github.com/MarcinOrlowski/pre-commit-hooks',
-    version = '1.5.0',
+    version = '1.6.0',
 
     author = 'Marcin Orlowski',
 
@@ -41,6 +41,7 @@ setup(
             'mor-end-of-file = hooks.end_of_file:main',
             'mor-branch-name = hooks.branch_name:main',
             'mor-composer-lock-in-sync = hooks.composer_lock_in_sync:main',
+            'mor-no-ai-slop = hooks.no_ai_slop:main',
             'mor-no-op = hooks.no_op:main',
         ],
     },

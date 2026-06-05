@@ -45,6 +45,13 @@
     files: '^(composer\.json|composer\.lock)$'
     pass_filenames: false
 
+-   id: no-ai-slop
+    name: Check for AI-slop characters
+    description: "Fails when modified text files contain forbidden typographic characters (em/en dashes, curly quotes, etc.)."
+    entry: mor-no-ai-slop
+    language: python
+    types: [text]
+
 -   id: no-op
     name: Do-nothing hook
     description: "[DEV] Dummy NO-OP hook."

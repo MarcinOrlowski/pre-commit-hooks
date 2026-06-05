@@ -13,6 +13,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
   * [checkstyle-jar](docs/checkstyle-jar.md) — runs the Checkstyle JAR against modified Java files.
   * [composer-lock-in-sync](docs/composer-lock-in-sync.md) — verifies Composer's `composer.lock` is not older than `composer.json`.
   * [end-of-file](docs/end-of-file.md) — ensures each file is empty or ends with exactly one newline.
+  * [no-ai-slop](docs/no-ai-slop.md) — fails when modified text files contain forbidden typographic characters (em/en dashes, curly quotes, etc.).
   * [trailing-whitespaces](docs/trailing-whitespaces.md) — detects (and optionally strips) trailing whitespace.
 - [License](#license)
 
