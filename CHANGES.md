@@ -6,6 +6,10 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 # Changelog #
 
+* v1.6.0 (2026-06-05)
+  * New `no-ai-slop` hook, detects specific typographic char (em/en dashes, curly quotes, etc.).
+
+
 * v1.5.0 (2026-04-20)
   * Added `composer-lock-in-sync` hook checks if `composer.lock` is not older than `composer.json`.
 
