@@ -6,6 +6,10 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 # Changelog #
 
+* v1.7.0 (2026-07-29)
+  * Widened `no-ai-slop` default character set.
+
+
 * v1.6.0 (2026-06-05)
   * New `no-ai-slop` hook, detects specific typographic char (em/en dashes, curly quotes, etc.).
 
