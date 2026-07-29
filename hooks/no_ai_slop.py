@@ -2,8 +2,9 @@
 # no-ai-slop
 #
 # Scans modified text files for "forbidden" typographic characters commonly
-# introduced by AI text generators (em/en dashes, curly quotes, non-breaking
-# and zero-width spaces). Fails (non-zero exit) when any is found, reporting
+# introduced by AI text generators (em/en dashes, curly quotes, exotic spaces,
+# invisible format and bidirectional control characters). Fails (non-zero
+# exit) when any is found, reporting
 # the file, line, column, code point and Unicode name. No autofix.
 #
 # Copyright ©2021-2026 Marcin Orlowski <mail [@] MarcinOrlowski.com>
@@ -21,17 +22,62 @@ from typing import Optional
 from typing import Sequence
 from typing import Tuple
 
-# Default set of forbidden characters. Ellipsis (U+2026) is deliberately NOT
-# included. Override with --chars to supply a different set per repository.
+# Default set of forbidden characters. Ellipsis (U+2026), guillemets (U+00AB,
+# U+00BB, legitimate in i.e. French or Polish prose) and ZERO WIDTH JOINER
+# (U+200D, legitimate in emoji sequences) are deliberately NOT included.
+# Override with --chars to supply a different set per repository.
+#
+# Invisible characters are spelled as escapes on purpose, to keep this source
+# readable and greppable.
 DEFAULT_FORBIDDEN_CHARS: str = (
-    '—'  # EM DASH
-    '–'  # EN DASH
+    # Quotation marks and primes
     '“'  # LEFT DOUBLE QUOTATION MARK
     '”'  # RIGHT DOUBLE QUOTATION MARK
+    '„'  # DOUBLE LOW-9 QUOTATION MARK
+    '‟'  # DOUBLE HIGH-REVERSED-9 QUOTATION MARK
     '‘'  # LEFT SINGLE QUOTATION MARK
     '’'  # RIGHT SINGLE QUOTATION MARK
-    ' '  # NO-BREAK SPACE
-    '​'  # ZERO WIDTH SPACE
+    '‚'  # SINGLE LOW-9 QUOTATION MARK
+    '‛'  # SINGLE HIGH-REVERSED-9 QUOTATION MARK
+    '′'  # PRIME
+    '″'  # DOUBLE PRIME
+
+    # Dashes, hyphens and their lookalikes
+    '—'  # EM DASH
+    '–'  # EN DASH
+    '‐'  # HYPHEN
+    '‑'  # NON-BREAKING HYPHEN
+    '‒'  # FIGURE DASH
+    '―'  # HORIZONTAL BAR
+    '−'  # MINUS SIGN
+
+    # Spaces
+    '\u00A0'  # NO-BREAK SPACE
+    '\u2002'  # EN SPACE
+    '\u2003'  # EM SPACE
+    '\u2007'  # FIGURE SPACE
+    '\u2009'  # THIN SPACE
+    '\u202F'  # NARROW NO-BREAK SPACE
+    '\u205F'  # MEDIUM MATHEMATICAL SPACE
+    '\u3000'  # IDEOGRAPHIC SPACE
+
+    # Invisible format characters
+    '\u00AD'  # SOFT HYPHEN
+    '\u200B'  # ZERO WIDTH SPACE
+    '\u200C'  # ZERO WIDTH NON-JOINER
+    '\u2060'  # WORD JOINER
+    '\uFEFF'  # ZERO WIDTH NO-BREAK SPACE (BOM)
+
+    # Bidirectional controls ("Trojan Source", CVE-2021-42574)
+    '\u202A'  # LEFT-TO-RIGHT EMBEDDING
+    '\u202B'  # RIGHT-TO-LEFT EMBEDDING
+    '\u202C'  # POP DIRECTIONAL FORMATTING
+    '\u202D'  # LEFT-TO-RIGHT OVERRIDE
+    '\u202E'  # RIGHT-TO-LEFT OVERRIDE
+    '\u2066'  # LEFT-TO-RIGHT ISOLATE
+    '\u2067'  # RIGHT-TO-LEFT ISOLATE
+    '\u2068'  # FIRST STRONG ISOLATE
+    '\u2069'  # POP DIRECTIONAL ISOLATE
 )
 
 
