@@ -6,6 +6,10 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 # Changelog #
 
+* v1.8.0 (2026-08-09)
+  * New `commit-msg` hook, rejects commit messages spanning too many lines or having too long lines.
+
+
 * v1.7.0 (2026-07-29)
   * Widened `no-ai-slop` default character set.
 
