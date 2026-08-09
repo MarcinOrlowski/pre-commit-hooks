@@ -37,6 +37,14 @@
     stages: [pre-push]
     additional_dependencies: [pyyaml]
 
+-   id: commit-msg
+    name: Check commit message line count and length
+    description: "Rejects commit messages spanning too many lines or having too long lines."
+    entry: mor-commit-msg
+    language: python
+    stages: [commit-msg]
+    always_run: true
+
 -   id: composer-lock-in-sync
     name: Check composer.lock is in sync with composer.json
     description: "Fails when composer.lock is older than composer.json."
