@@ -63,9 +63,9 @@ allow:
 
 ### Arguments ###
 
-* `-c PATH`, `--config PATH` — path to the YAML config file. Defaults to `.branch-name.yaml`. It
+* `-c PATH`, `--config PATH` - path to the YAML config file. Defaults to `.branch-name.yaml`. It
   is not an error for the default file to be missing; a non-default path must exist.
-* `-p PATTERN`, `--pattern PATTERN` — regular expression override. When provided, it takes
+* `-p PATTERN`, `--pattern PATTERN` - regular expression override. When provided, it takes
   precedence over the `pattern` value in the config file. Useful for one-off usage without a
   config file at all.
 
@@ -94,7 +94,7 @@ allow:
 
 ### Adding more branches to the whitelist ###
 
-Edit `.branch-name.yaml` and extend the `allow` list — one YAML list item per branch. No
+Edit `.branch-name.yaml` and extend the `allow` list - one YAML list item per branch. No
 separators, no CLI arguments to juggle:
 
 ```yaml
@@ -156,8 +156,7 @@ Allowed exceptions: master, dev
 
 ## Exit codes ##
 
-* `0` — branch name matches the pattern, or is in the `allow` list, or HEAD is detached.
-* `1` — branch name does not match and is not whitelisted.
-* `10` — configuration error (missing config file at a non-default path, invalid YAML, invalid
+* `0` - branch name matches the pattern, or is in the `allow` list, or HEAD is detached.
+* `1` - branch name does not match and is not whitelisted.
+* `10` - configuration error (missing config file at a non-default path, invalid YAML, invalid
   regex, no pattern at all, wrong types in the config).
-

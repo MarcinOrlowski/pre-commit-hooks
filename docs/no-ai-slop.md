@@ -27,7 +27,7 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 
 ## Description ##
 
-Scans modified text files for "forbidden" typographic characters — the kind most commonly
+Scans modified text files for "forbidden" typographic characters - the kind most commonly
 introduced by AI text generators when they rewrite plain ASCII into "prettier" Unicode. When any
 forbidden character is found the hook fails the commit and reports the offending file, line,
 column, code point and Unicode name. There is **no autofix**: the hook only detects.
@@ -114,7 +114,7 @@ A file that is staged but not valid UTF-8 is skipped with a `[SKIP]` notice rath
 
 ## Arguments ##
 
-* `--chars CHARS` — the set of characters to forbid. Supplying this **replaces** the built-in
+* `--chars CHARS` - the set of characters to forbid. Supplying this **replaces** the built-in
   default set, so include every character you want to block. An empty value is rejected with
   exit code `10`.
 
@@ -133,7 +133,7 @@ A file that is staged but not valid UTF-8 is skipped with a `[SKIP]` notice rath
 
 ### Custom set ###
 
-Forbid only em and en dashes:
+Forbid only `em` and `en` dashes:
 
 ```yaml
 - repo: https://github.com/MarcinOrlowski/pre-commit-hooks
@@ -142,6 +142,25 @@ Forbid only em and en dashes:
     - id: no-ai-slop
       args: [ '--chars=—–' ]
 ```
+
+### Excluding files ###
+
+If you need to retain "forbidden" characters (i.e. like I need for this doc file), then use
+built-in `exclude` key, which takes a single Python regular expression matched against each
+staged file path:
+
+```yaml
+- repo: https://github.com/MarcinOrlowski/pre-commit-hooks
+  rev: main
+  hooks:
+    - id: no-ai-slop
+      exclude: '^(docs/typography\.md|CHANGELOG\.md)$'
+```
+
+Note that this excludes the **whole file**, so nothing in it is scanned anymore.
+
+To exclude by file type instead of by path, use `exclude_types` (see the example above) or
+`types`.
 
 ## What users see ##
 
@@ -156,6 +175,6 @@ The line and column are 1-based. The commit is blocked until the offending chara
 
 ## Exit codes ##
 
-* `0` — no forbidden characters found.
-* `1` — at least one forbidden character found (or a file could not be read).
-* `10` — invalid `--chars` value (empty set).
+* `0` - no forbidden characters found.
+* `1` - at least one forbidden character found (or a file could not be read).
+* `10` - invalid `--chars` value (empty set).

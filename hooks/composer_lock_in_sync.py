@@ -5,7 +5,7 @@
 # was last changed. If either file is absent the hook is a no-op, so
 # it is safe to enable in repositories that do not use Composer.
 #
-# Detection is based on the files' modification times — the moment
+# Detection is based on the files' modification times - the moment
 # `composer.json` is touched (new dependency added, version bumped,
 # …) `composer.lock` must be regenerated to stay consistent.
 #

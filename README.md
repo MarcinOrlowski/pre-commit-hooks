@@ -9,13 +9,13 @@ Handy Git hooks to integrate with [pre-commit](http://pre-commit.com/) framework
 - [Configure pre-commit](#configure-pre-commit)
 - [Two ways to invoke pre-commit](#two-ways-to-invoke-pre-commit)
 - **Available hooks**
-  * [branch-name](docs/branch-name.md) — verifies the current Git branch name matches a required regular expression (runs at `pre-push`).
-  * [checkstyle-jar](docs/checkstyle-jar.md) — runs the Checkstyle JAR against modified Java files.
-  * [commit-msg](docs/commit-msg.md) — rejects commit messages spanning too many lines or having too long lines (runs at `commit-msg`).
-  * [composer-lock-in-sync](docs/composer-lock-in-sync.md) — verifies Composer's `composer.lock` is not older than `composer.json`.
-  * [end-of-file](docs/end-of-file.md) — ensures each file is empty or ends with exactly one newline.
-  * [no-ai-slop](docs/no-ai-slop.md) — fails when modified text files contain forbidden typographic characters (em/en dashes, curly quotes, etc.).
-  * [trailing-whitespaces](docs/trailing-whitespaces.md) — detects (and optionally strips) trailing whitespace.
+  * [branch-name](docs/branch-name.md) - verifies the current Git branch name matches a required regular expression (runs at `pre-push`).
+  * [checkstyle-jar](docs/checkstyle-jar.md) - runs the Checkstyle JAR against modified Java files.
+  * [commit-msg](docs/commit-msg.md) - rejects commit messages spanning too many lines or having too long lines (runs at `commit-msg`).
+  * [composer-lock-in-sync](docs/composer-lock-in-sync.md) - verifies Composer's `composer.lock` is not older than `composer.json`.
+  * [end-of-file](docs/end-of-file.md) - ensures each file is empty or ends with exactly one newline.
+  * [no-ai-slop](docs/no-ai-slop.md) - fails when modified text files contain forbidden typographic characters (em/en dashes, curly quotes, etc.).
+  * [trailing-whitespaces](docs/trailing-whitespaces.md) - detects (and optionally strips) trailing whitespace.
 - [License](#license)
 
 <!--TOC-->

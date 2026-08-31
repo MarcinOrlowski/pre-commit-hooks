@@ -32,7 +32,7 @@ lines may be. By default only a single line (the subject) is allowed, and no lin
 than 100 characters.
 
 The hook runs at the `commit-msg` stage, so a message violating the limits aborts the commit
-before it is created. The rejected message is not lost — Git keeps it in `.git/COMMIT_EDITMSG`,
+before it is created. The rejected message is not lost - Git keeps it in `.git/COMMIT_EDITMSG`,
 so `git commit -e --file=.git/COMMIT_EDITMSG` brings it back up for editing.
 
 ### What counts as a line ###
@@ -48,7 +48,7 @@ message file. Before the limits are applied:
 * runs of empty lines are collapsed into a single empty line, and leading/trailing empty lines
   are removed.
 
-An empty message passes — Git aborts such a commit on its own.
+An empty message passes - Git aborts such a commit on its own.
 
 Note that with the default `--max-lines=1` the customary "subject, blank line, body" layout is
 rejected, as that message spans three lines. Raise the limit if you want to allow a body.
@@ -57,9 +57,9 @@ rejected, as that message spans three lines. Raise the limit if you want to allo
 
 ### Arguments ###
 
-* `-n COUNT`, `--max-lines COUNT` — maximum number of lines the message may span. Defaults to
+* `-n COUNT`, `--max-lines COUNT` - maximum number of lines the message may span. Defaults to
   `1`. Use `0` to disable the check.
-* `-w COUNT`, `--max-length COUNT` — maximum length of a single line, in characters. Defaults to
+* `-w COUNT`, `--max-length COUNT` - maximum length of a single line, in characters. Defaults to
   `100`. Use `0` to disable the check.
 
 ## Examples ##
@@ -127,7 +127,7 @@ Commit message line 1 is 118 characters long, exceeding the limit of 100.
 
 ## Exit codes ##
 
-* `0` — the message fits within both limits (or is empty).
-* `1` — the message has too many lines, or at least one line is too long.
-* `10` — configuration error (a limit that is not a non-negative integer, an unreadable message
+* `0` - the message fits within both limits (or is empty).
+* `1` - the message has too many lines, or at least one line is too long.
+* `10` - configuration error (a limit that is not a non-negative integer, an unreadable message
   file, or the hook not being run at the `commit-msg` stage).

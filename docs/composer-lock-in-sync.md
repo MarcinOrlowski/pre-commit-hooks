@@ -33,14 +33,14 @@ Verifies that [Composer](https://getcomposer.org/)'s `composer.lock` is not olde
 that happens.
 
 The hook is a **no-op** when either `composer.json` or `composer.lock` is missing, so it is
-safe to enable repo-wide — it simply does nothing in projects that do not use Composer.
+safe to enable repo-wide - it simply does nothing in projects that do not use Composer.
 
 Detection is based on the files' modification times (`mtime`). The hook's manifest is wired to
 fire only when one of the two files is staged, so it will not run on unrelated commits.
 
 ## Arguments ##
 
-* `--path PATH` — directory containing `composer.json` and `composer.lock`. Defaults to the
+* `--path PATH` - directory containing `composer.json` and `composer.lock`. Defaults to the
   current working directory, which is what `pre-commit` hands the hook. Override this only if
   the Composer project lives in a subdirectory of the repository (for example a monorepo).
 
@@ -48,7 +48,7 @@ fire only when one of the two files is staged, so it will not run on unrelated c
 
 ### Standard project ###
 
-Composer files live in the repository root — no arguments needed:
+Composer files live in the repository root - no arguments needed:
 
 ```yaml
 - repo: https://github.com/MarcinOrlowski/pre-commit-hooks
@@ -90,5 +90,5 @@ and the hook passes.
 
 ## Exit codes ##
 
-* `0` — both files present and in sync, or one/both files missing (nothing to check).
-* `1` — `composer.lock` is older than `composer.json`.
+* `0` - both files present and in sync, or one/both files missing (nothing to check).
+* `1` - `composer.lock` is older than `composer.json`.
